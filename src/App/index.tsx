@@ -5,15 +5,16 @@ import { shallow } from 'zustand/shallow'
 import useStore from './store'
 import type { RFState } from './store';
 import { SelectorNode, SequenceNode } from './CustomNode'
+import CustomEdge from './CustomEdge';
  
 import '@xyflow/react/dist/style.css';
-// import '../index.css';
 
 const selector = (state: RFState) => ({
   nodes: state.nodes,
   edges: state.edges,
   onNodesChange: state.onNodesChange,
-  onEdgesChange: state.onEdgesChange
+  onEdgesChange: state.onEdgesChange,
+  addEdge: state.addEdge,
 })
 
 // puts the center of the node in its center
@@ -24,15 +25,20 @@ const nodeTypes = {
   sequence: SequenceNode,
 }
  
+const edgeTypes = {
+  btEdge: CustomEdge
+}
 function Flow() {
-  const { nodes, edges, onNodesChange, onEdgesChange } = useStore(selector, shallow);
+  const { nodes, edges, onNodesChange, onEdgesChange, addEdge } = useStore(selector, shallow);
   return (
     <ReactFlow
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
+      edgeTypes={edgeTypes}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onConnect={addEdge}
       nodeOrigin={nodeOrigin}
       fitView
     >
