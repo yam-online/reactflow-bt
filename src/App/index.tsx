@@ -4,7 +4,7 @@ import { shallow } from 'zustand/shallow'
 
 import useStore from './store'
 import type { RFState } from './store';
-import { SelectorNode, SequenceNode } from './CustomNode'
+import { SelectorNode, SequenceNode, ActionNode, ConditionNode } from './CustomNode'
 import CustomEdge from './CustomEdge';
  
 import '@xyflow/react/dist/style.css';
@@ -14,6 +14,7 @@ const selector = (state: RFState) => ({
   edges: state.edges,
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
+  createNewNode: state.createNewNode,
   addEdge: state.addEdge,
 })
 
@@ -23,19 +24,21 @@ const nodeOrigin: NodeOrigin = [0.5, 0.5];
 const nodeTypes = {
   selector: SelectorNode,
   sequence: SequenceNode,
+  action: ActionNode,
+  condition: ConditionNode,
 }
  
 const edgeTypes = {
   btEdge: CustomEdge
 }
 function Flow() {
-  const { nodes, edges, onNodesChange, onEdgesChange, addEdge } = useStore(selector, shallow);
+  const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge } = useStore(selector, shallow);
   return (
     <ReactFlow
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
-      edgeTypes={edgeTypes}
+      // edgeTypes={edgeTypes}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={addEdge}
@@ -47,23 +50,25 @@ function Flow() {
       <Panel className='space-x-4' position="top-right">
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => useStore.getState().createNewNode('selector', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('selector', '', { x: 100, y: 100 })}
         >
           selector
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => useStore.getState().createNewNode('sequence', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('sequence', '', { x: 100, y: 100 })}
         >
           sequence
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
+          onClick={() => createNewNode('action', '', { x: 100, y: 100 })}
         >
           action
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
+          onClick={() => createNewNode('condition', '', { x: 100, y: 100 })}
         >
           condition
         </button>

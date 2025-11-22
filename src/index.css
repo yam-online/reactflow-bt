@@ -36,3 +36,19 @@ body,
   padding: 2px 5px;
   font-weight: 700;
 }
+
+.react-flow__node-action {
+  background: #eb34ab;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  padding: 2px 5px;
+  font-weight: 700;
+}
+
+.react-flow__node-condition {
+  background: #eb34ab;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  padding: 2px 5px;
+  font-weight: 700;
+}
