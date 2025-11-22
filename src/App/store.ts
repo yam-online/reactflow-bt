@@ -15,6 +15,7 @@ export type RFState = {
   edges: Edge[];
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
+  createNewNode: (type: string, label: string, position: { x: number; y: number }) => void;
 };
 
 const useStore = createWithEqualityFn<RFState>((set, get) => ({
@@ -40,6 +41,17 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
+
+  createNewNode: (type, label, position) => {
+    const newNode: Node = {
+      id: crypto.randomUUID(),
+      type, 
+      data: { label },
+      position,
+    };
+    set({ nodes: [...get().nodes, newNode] });
+  },
+
 }));
 
 export default useStore;

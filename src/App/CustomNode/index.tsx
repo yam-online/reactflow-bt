@@ -11,7 +11,7 @@ export function SelectorNode(props: any) {
   return (
     <>
       <label>Selector: </label>
-      <input defaultValue={data.label} />
+      <input defaultValue={data.label} placeholder="Type here..."/>
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
     </>
@@ -24,7 +24,7 @@ export function SequenceNode(props: any) {
   return (
     <>
       <label>Sequence: </label>
-      <input defaultValue={data.label} />
+      <input defaultValue={data.label} placeholder="Type here..."/>
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
     </>

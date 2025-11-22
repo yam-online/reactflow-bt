@@ -41,12 +41,13 @@ function Flow() {
       <Panel className='space-x-4' position="top-right">
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => console.log("hi")}
+          onClick={() => useStore.getState().createNewNode('selector', '', { x: 100, y: 100 })}
         >
           selector
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
+          onClick={() => useStore.getState().createNewNode('sequence', '', { x: 100, y: 100 })}
         >
           sequence
         </button>
