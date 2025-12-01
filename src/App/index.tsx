@@ -31,6 +31,7 @@ const nodeTypes = {
 const edgeTypes = {
   btEdge: CustomEdge
 }
+
 function Flow() {
   const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge } = useStore(selector, shallow);
   return (
@@ -71,6 +72,12 @@ function Flow() {
           onClick={() => createNewNode('condition', '', { x: 100, y: 100 })}
         >
           condition
+        </button>
+        <button
+          className='px-2 py-1 rounded bg-white shadow'
+          onClick={() => createNewNode('condition', '', { x: 100, y: 100 })}
+        >
+          play tree
         </button>
       </Panel>
     </ReactFlow>
