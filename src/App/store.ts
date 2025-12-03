@@ -47,7 +47,7 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
   createNewNode: (type, label, position) => {
     const newNode: Node = {
       id: nanoid(),
-      type, 
+      type: type!, 
       data: { label },
       position,
     };

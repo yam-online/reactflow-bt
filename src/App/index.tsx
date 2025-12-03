@@ -1,4 +1,4 @@
-import { ReactFlow, Controls, Panel } from '@xyflow/react';
+import { ReactFlow, Controls, Panel, useNodes, useEdges, getIncomers } from '@xyflow/react';
 import type { NodeOrigin } from '@xyflow/react';
 import { shallow } from 'zustand/shallow'
 
@@ -6,6 +6,7 @@ import useStore from './store'
 import type { RFState } from './store';
 import { SelectorNode, SequenceNode, ActionNode, ConditionNode } from './CustomNode'
 import CustomEdge from './CustomEdge';
+import TreePlayer from '../features/logic';
  
 import '@xyflow/react/dist/style.css';
 
@@ -34,6 +35,8 @@ const edgeTypes = {
 
 function Flow() {
   const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge } = useStore(selector, shallow);
+
+  TreePlayer();
   return (
     <ReactFlow
       nodes={nodes}
