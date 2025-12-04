@@ -38,7 +38,7 @@ body,
 }
 
 .react-flow__node-action {
-  background: #eb34ab;
+  background: #f6ad55;
   border-radius: 2px;
   border: 1px solid transparent;
   padding: 2px 5px;
@@ -51,4 +51,15 @@ body,
   border: 1px solid transparent;
   padding: 2px 5px;
   font-weight: 700;
+}
+
+/** for checkboxes **/
+.text {
+  color: white;
+  font-size: 12px;
+  font-weight: 200;
+}
+.box {
+  vertical-align: middle;
+  transform: scale(1.0);
 }
