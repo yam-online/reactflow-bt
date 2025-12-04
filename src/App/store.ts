@@ -19,6 +19,7 @@ export type RFState = {
   createNewNode: (type: string, label: string, status: string, position: { x: number; y: number }) => void;
   addEdge: (data: any) => void;
   updateNodeLabel: (nodeId: string, label: string) => void;
+  updateNodeStatus: (nodeId: string, status: string) => void;
 };
 
 const useStore = createWithEqualityFn<RFState>((set, get) => ({
@@ -30,6 +31,7 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
         label: 'idj',
         status: 'none',
         updateLabel: (newLabel: string) => get().updateNodeLabel('root', newLabel),
+        updateStatus: (newStatus: string) => get().updateNodeStatus('root', newStatus),
       },
       position: { x: 0, y: 0 },
     },
@@ -80,7 +82,19 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
         return node;
       }),
     });
-  }
+  },
+
+  updateNodeStatus: (nodeId, status) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if(node.id === nodeId) {
+          node.data = { ...node.data, status };
+        }
+
+        return node;
+      })
+    });
+  },
 
 }));
 
