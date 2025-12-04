@@ -16,7 +16,7 @@ export type RFState = {
   edges: Edge[];
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
-  createNewNode: (type: string, label: string, position: { x: number; y: number }) => void;
+  createNewNode: (type: string, label: string, status: string, position: { x: number; y: number }) => void;
   addEdge: (data: any) => void;
 };
 
@@ -25,7 +25,10 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     {
       id: 'root',
       type: 'selector',
-      data: { label: 'idj' },
+      data: {
+        label: 'idj',
+        status: 'none',
+      },
       position: { x: 0, y: 0 },
     },
   ],
@@ -44,11 +47,11 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
     });
   },
 
-  createNewNode: (type, label, position) => {
+  createNewNode: (type, label, status, position) => {
     const newNode: Node = {
       id: nanoid(),
       type: type!, 
-      data: { label },
+      data: { label, status },
       position,
     };
     set({ nodes: [...get().nodes, newNode] });

@@ -54,31 +54,30 @@ function Flow() {
       <Panel className='space-x-4' position="top-right">
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('selector', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('selector', '', 'none', { x: 100, y: 100 })}
         >
           selector
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('sequence', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('sequence', '', 'none', { x: 100, y: 100 })}
         >
           sequence
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('action', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('action', '', 'none', { x: 100, y: 100 })}
         >
           action
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('condition', '', { x: 100, y: 100 })}
+          onClick={() => createNewNode('condition', '', 'none', { x: 100, y: 100 })}
         >
           condition
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('condition', '', { x: 100, y: 100 })}
         >
           play tree
         </button>
