@@ -7,9 +7,10 @@ import type {
   OnEdgesChange,
 } from '@xyflow/react';
 
-import { applyNodeChanges, applyEdgeChanges } from '@xyflow/react';
+import { applyNodeChanges, applyEdgeChanges, useNodesState } from '@xyflow/react';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { nanoid } from 'nanoid/non-secure';
+import { useState, useEffect } from 'react';
 
 export type RFState = {
   nodes: Node[];
@@ -18,6 +19,7 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   createNewNode: (type: string, label: string, status: string, position: { x: number; y: number }) => void;
   addEdge: (data: any) => void;
+  updateNodeLabel: (nodeId: string, label: string) => void;
 };
 
 const useStore = createWithEqualityFn<RFState>((set, get) => ({
@@ -63,6 +65,18 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
 
     set({edges: [edge, ...get().edges] });
   },
+
+  updateNodeLabel: (nodeId, label) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if(node.id === nodeId) {
+          node.data = { ...node.data, label };
+        }
+
+        return node;
+      }),
+    });
+  }
 
 }));
 

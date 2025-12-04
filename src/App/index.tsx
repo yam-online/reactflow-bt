@@ -17,6 +17,7 @@ const selector = (state: RFState) => ({
   onEdgesChange: state.onEdgesChange,
   createNewNode: state.createNewNode,
   addEdge: state.addEdge,
+  updateNodeLabel: state.updateNodeLabel,
 })
 
 // puts the center of the node in its center
@@ -34,8 +35,12 @@ const edgeTypes = {
 }
 
 function Flow() {
-  const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge } = useStore(selector, shallow);
+  const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge, updateNodeLabel } = useStore(selector, shallow);
 
+  nodes.forEach((node) => {
+    console.log(node.data.label);
+  })
+  
   TreePlayer();
   return (
     <ReactFlow
@@ -66,13 +71,13 @@ function Flow() {
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('action', '', 'none', { x: 100, y: 100 })}
+          onClick={() => createNewNode('action', '', 'fail', { x: 100, y: 100 })}
         >
           action
         </button>
         <button
           className='px-2 py-1 rounded bg-white shadow'
-          onClick={() => createNewNode('condition', '', 'none', { x: 100, y: 100 })}
+          onClick={() => createNewNode('condition', '', 'fail', { x: 100, y: 100 })}
         >
           condition
         </button>
