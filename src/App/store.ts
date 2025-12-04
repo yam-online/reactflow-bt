@@ -7,10 +7,9 @@ import type {
   OnEdgesChange,
 } from '@xyflow/react';
 
-import { applyNodeChanges, applyEdgeChanges, useNodesState } from '@xyflow/react';
+import { applyNodeChanges, applyEdgeChanges } from '@xyflow/react';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { nanoid } from 'nanoid/non-secure';
-import { useState, useEffect } from 'react';
 
 export type RFState = {
   nodes: Node[];

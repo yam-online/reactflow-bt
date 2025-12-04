@@ -35,12 +35,12 @@ const edgeTypes = {
 }
 
 function Flow() {
-  const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge, updateNodeLabel } = useStore(selector, shallow);
+  const { nodes, edges, onNodesChange, onEdgesChange, createNewNode, addEdge } = useStore(selector, shallow);
 
   nodes.forEach((node) => {
     console.log(node.data.label);
   })
-  
+
   TreePlayer();
   return (
     <ReactFlow
