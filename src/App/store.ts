@@ -30,6 +30,7 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
       data: {
         label: 'idj',
         status: 'none',
+        updateLabel: (newLabel: string) => get().updateNodeLabel('root', newLabel),
       },
       position: { x: 0, y: 0 },
     },
@@ -50,10 +51,14 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
   },
 
   createNewNode: (type, label, status, position) => {
+    const id = nanoid();
     const newNode: Node = {
-      id: nanoid(),
+      id: id,
       type: type!, 
-      data: { label, status },
+      data: {
+        label,
+        status,
+        updateLabel: (newLabel: string) => get().updateNodeLabel(id, newLabel) },
       position,
     };
     set({ nodes: [...get().nodes, newNode] });
