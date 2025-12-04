@@ -5,6 +5,7 @@ export type NodeData = {
   label: string;
   status: string;
   updateLabel: Function;
+  updateStatus: Function;
 }
 
 export function SelectorNode(props: any) {
@@ -18,7 +19,7 @@ export function SelectorNode(props: any) {
         value={localLabel}
         placeholder="Type here..."
         onChange={(evt) => setLocalLabel(evt.target.value)}
-        onBlur={data.updateLabel(localLabel)}
+        onBlur={() => data.updateLabel(localLabel)}
       />
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
@@ -37,7 +38,7 @@ export function SequenceNode(props: any) {
         value={localLabel}
         placeholder="Type here..."
         onChange={(evt) => setLocalLabel(evt.target.value)}
-        onBlur={data.updateLabel(localLabel)}
+        onBlur={() => data.updateLabel(localLabel)}
       />
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
@@ -50,9 +51,12 @@ export const Checkbox = (props: any) => {
   const data = (props.data ?? {}) as NodeData;
 
   const checkHandler = () => {
-    setIsChecked(!isChecked);
-    data.status = isChecked ? 'success' : 'failure';
-  }
+    setIsChecked(prev => {
+      const next = !prev;
+      data.updateStatus(next ? 'success' : 'fail');
+      return next;
+    });
+  };
 
   return (
     <div>
@@ -83,9 +87,9 @@ export function ActionNode(props: any) {
         value={localLabel}
         placeholder="Type here..."
         onChange={(evt) => setLocalLabel(evt.target.value)}
-        onBlur={data.updateLabel(localLabel)}
+        onBlur={() => data.updateLabel(localLabel)}
       />
-      <Checkbox />
+      <Checkbox data={data}/>
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
     </>
@@ -102,9 +106,9 @@ export function ConditionNode(props: any) {
         value={localLabel}
         placeholder="Type here..."
         onChange={(evt) => setLocalLabel(evt.target.value)}
-        onBlur={data.updateLabel(localLabel)}
+        onBlur={() => data.updateLabel(localLabel)}
       />
-      <Checkbox />
+      <Checkbox data={data}/>
       <Handle type="target" position={Position.Top} />
       <Handle type="source" position={Position.Bottom} />
     </>
